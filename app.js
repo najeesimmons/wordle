@@ -1,5 +1,2 @@
-function greeting(name) {
-    console.log("Hello " + name + ", ready to play?")
-}
+let wordsArray = ["movie", "eagle", "scare", "renew"]
 
-greeting("Najee");
