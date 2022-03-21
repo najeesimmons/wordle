@@ -1,7 +1,8 @@
 
 // this array contains words to be used as answers
-let wordsArray = ["movie", "eagle", "scare", "renew", "prime", "slime"]
+const wordsArray = ["movie", "eagle", "scare", "renew", "prime", "slime"]
 let randomWord 
+let wordGuess
 
 // this function randomly picks a word from wordsArray to be the answer
 function wordSelector() {
@@ -15,7 +16,14 @@ function wordSelector() {
 // for now it will need to stop any incorrect letter and console log "wrong answer"
 function checkAnswer() {
     let randomWordArray = randomWord.split("") 
-    console.log(randomWordArray)
+    wordGuess = prompt("Guess the word!");
+    let wordGuessArray = wordGuess.split("")
+    for (let i = 0; i < randomWordArray.length; i++) {
+        if (randomWordArray[i] !== wordGuessArray[1]) {
+            console.log("Your guess was wrong!")
+            break
+        }
+    }
 }
 
 // this function will initate the game and all funcitons needed to play
