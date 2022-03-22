@@ -18,14 +18,13 @@ function checkAnswer() {
     let randomWordArray = randomWord.split("") 
     wordGuess = prompt("Guess the word!");
     let wordGuessArray = wordGuess.split("")
-    for (let i = 0; i < randomWordArray.length; i++) {
+    for (let i = 0; i <= randomWordArray.length; i++) {
         if (randomWordArray[i] !== wordGuessArray[i]) {
-            console.log(`The letter ${randomWordArray[i]} is incorrect.`)
+            console.log(`The letter ${wordGuessArray[i]} is incorrect.`)
         } else {
-            console.log(`The letter ${randomWordArray[i]} is correct.`)
+            console.log(`"${wordGuessArray[i]}" is the correct letter, in the correct place.`)
             continue
         }
-        console.log("Continue Playing")
     }
 }
 
