@@ -3,7 +3,7 @@
 const wordsArray = ["movie", "eagle", "scare", "renew", "prime", "slime"]
 let randomWord 
 let wordGuess
-let counter = 0
+let testedLetter 
 
 // this function randomly picks a word from wordsArray to be the answer
 function wordSelector() {
@@ -17,22 +17,34 @@ function wordSelector() {
 function checkAnswer() {
     let randomWordArray = randomWord.split("") 
     wordGuess = prompt("Guess the word!");
+    console.log(wordGuess)
     let wordGuessArray = wordGuess.split("")
     for (let i = 0; i < randomWordArray.length; i++) {
         if (randomWordArray[i] !== wordGuessArray[i]) {
-            // console.log(`The letter ${wordGuessArray[i]} is incorrect.`)
-            // need to loop thru other letters in wordGuessArray to see if they are in randomWordArray
-            for (let j = 0; j < wordGuessArray.length; j++) {
-                // if [i] is in [j]
-                if (wordGuessArray[i] === randomWordArray[j]) {
-                    console.log(`The letter "${wordGuessArray[i]}" is in this word, but this is not its correct place.`)
+            // turn currently examined wrong letter from the randomWordArray into variable testedLetter
+            testedLetter = wordGuessArray[i]
+            console.log(testedLetter)
+            console.log(wordGuessArray)
+            console.log(`The letter ${testedLetter} is not found at this position. Now testing to see if it's in this word at all...`)
+            // need to take testedLetter and loop through random word to see if it appears elsewhere
+            for (let j = 0; j < randomWordArray.length; j++) {
+                // I need to figure out how to skip index 
+                if ([j] === [i]) {
+                    console.log(`${testedLetter}`)
+                    continue;
+                }
+                
+                
+                ////// I believe everything above this line is correct! I hope!
+                if (testedLetter === randomWordArray[j]) {
+                    console.log(`The letter "${testedLetter}" is in this word, but this is not its' correct place.`)
                 } 
-                if (wordGuessArray[i] !== randomWordArray[j]) {
-                    console.log(`The letter ${wordGuessArray[i]} is not in this word.`)
+                if (testedLetter !== randomWordArray[j]) {
+                    console.log(`The letter "${testedLetter}" does not belong in this position.`)
                 }
             }
         } else {
-            console.log(`"${wordGuessArray[i]}" is the correct letter, in the correct place.`)
+            console.log(`"${testedLetter}" is the correct letter, in the correct place.`)
         }
     }
 }
