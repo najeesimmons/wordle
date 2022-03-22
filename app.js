@@ -3,6 +3,7 @@
 const wordsArray = ["movie", "eagle", "scare", "renew", "prime", "slime"]
 let randomWord 
 let wordGuess
+let counter = 0
 
 // this function randomly picks a word from wordsArray to be the answer
 function wordSelector() {
@@ -19,15 +20,15 @@ function checkAnswer() {
     let wordGuessArray = wordGuess.split("")
     for (let i = 0; i < randomWordArray.length; i++) {
         if (randomWordArray[i] !== wordGuessArray[i]) {
-            console.log(`The letter ${wordGuessArray[i]} is incorrect.`)
+            // console.log(`The letter ${wordGuessArray[i]} is incorrect.`)
             // need to loop thru other letters in wordGuessArray to see if they are in randomWordArray
-            // how can i skip [i]
             for (let j = 0; j < wordGuessArray.length; j++) {
                 // if [i] is in [j]
                 if (wordGuessArray[i] === randomWordArray[j]) {
-                    console.log(`The letter "${wordGuessArray[i]}" is in this word, but this is not its place.`)
-                } else {
-                    continue
+                    console.log(`The letter "${wordGuessArray[i]}" is in this word, but this is not its correct place.`)
+                } 
+                if (wordGuessArray[i] !== randomWordArray[j]) {
+                    console.log(`The letter ${wordGuessArray[i]} is not in this word.`)
                 }
             }
         } else {
