@@ -21,9 +21,13 @@ function checkAnswer() {
         if (randomWordArray[i] !== wordGuessArray[i]) {
             console.log(`The letter ${wordGuessArray[i]} is incorrect.`)
             // need to loop thru other letters in wordGuessArray to see if they are in randomWordArray
+            // how can i skip [i]
             for (let j = 0; j < wordGuessArray.length; j++) {
+                // if [i] is in [j]
                 if (wordGuessArray[i] === randomWordArray[j]) {
                     console.log(`The letter "${wordGuessArray[i]}" is in this word, but this is not its place.`)
+                } else {
+                    continue
                 }
             }
         } else {
