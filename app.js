@@ -13,17 +13,21 @@ function wordSelector() {
 
 // this will check whether the player's guess is the right answer
 // it will check each letter and compare against randomWord
-// for now it will need to stop any incorrect letter and console log "wrong answer"
 function checkAnswer() {
     let randomWordArray = randomWord.split("") 
     wordGuess = prompt("Guess the word!");
     let wordGuessArray = wordGuess.split("")
-    for (let i = 0; i <= randomWordArray.length; i++) {
+    for (let i = 0; i < randomWordArray.length; i++) {
         if (randomWordArray[i] !== wordGuessArray[i]) {
             console.log(`The letter ${wordGuessArray[i]} is incorrect.`)
+            // need to loop thru other letters in wordGuessArray to see if they are in randomWordArray
+            for (let j = 0; j < wordGuessArray.length; j++) {
+                if (wordGuessArray[i] === randomWordArray[j]) {
+                    console.log(`The letter "${wordGuessArray[i]}" is in this word, but this is not its place.`)
+                }
+            }
         } else {
             console.log(`"${wordGuessArray[i]}" is the correct letter, in the correct place.`)
-            continue
         }
     }
 }
