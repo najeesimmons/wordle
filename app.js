@@ -28,14 +28,13 @@ function checkAnswer() {
             console.log(`The letter ${testedLetter} is not found at this position. Now testing to see if it's in this word at all...`)
             // need to take testedLetter and loop through random word to see if it appears elsewhere
             for (let j = 0; j < randomWordArray.length; j++) {
-                // I need to figure out how to skip index 
-                if ([j] === [i]) {
-                    console.log(`${testedLetter}`)
+                // I WANT TO SKIP INDEX IN FOR LOOP "j" WHEN IT IS THE SAME
+                // AS FOR LOOP HERE "i"
+                if (j === i) {
+                    console.log(`Test`)
                     continue;
                 }
-                
-                
-                ////// I believe everything above this line is correct! I hope!
+               
                 if (testedLetter === randomWordArray[j]) {
                     console.log(`The letter "${testedLetter}" is in this word, but this is not its' correct place.`)
                 } 
@@ -44,7 +43,7 @@ function checkAnswer() {
                 }
             }
         } else {
-            console.log(`"${testedLetter}" is the correct letter, in the correct place.`)
+            console.log(`"${wordGuessArray[i]}" is the correct letter, in the correct place.`)
         }
     }
 }
