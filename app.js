@@ -5,6 +5,18 @@ let randomWord
 let wordGuess
 let testedLetter 
 
+
+let entry = document.getElementById('box1');
+console.log(entry)
+entry.addEventListener('keypress', insertLetter) 
+
+function insertLetter() {
+    entry.innerHTML="T";
+}
+
+
+
+
 // this function randomly picks a word from wordsArray to be the answer
 function wordSelector() {
     let wordIndex = Math.floor(Math.random() * wordsArray.length)

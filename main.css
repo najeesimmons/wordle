@@ -2,6 +2,7 @@
     display: grid;
     grid-template-columns: repeat(5, 75px);
     grid-gap: 5px;
+   
 }
 
 .box {
