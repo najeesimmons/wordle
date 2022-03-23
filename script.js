@@ -1,18 +1,17 @@
+console.log(document.querySelector('.box'));
 
 // this array contains words to be used as answers
 const wordsArray = ["movie", "eagle", "scare", "renew", "prime", "slime"]
-let randomWord 
-let wordGuess
-let testedLetter 
+let randomWord = null
+let wordGuess = null
+let testedLetter = null
 
 
-let entry = document.getElementById('box1');
-console.log(entry)
-entry.addEventListener('keypress', insertLetter) 
+// function insertLetter() {
+    // entry.innerHTML="T";
+// }
+// entry.addEventListener('keypress', insertLetter) 
 
-function insertLetter() {
-    entry.innerHTML="T";
-}
 
 
 
@@ -63,4 +62,4 @@ function startGame() {
     checkAnswer()
 }
 
-startGame()
+// startGame()
