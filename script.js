@@ -1,27 +1,26 @@
-
-
 // this array contains words to be used as answers
 const wordsArray = ["movie", "eagle", "scare", "renew", "prime", "slime"]
 let randomWord = null
 let wordGuess = null
 let testedLetter = null
+// counter variable declare globally 
+let counter = 0
 
 
-// setting #div1 on the DOM to a variable
-let testBox = document.getElementById('box1')
+// setting #div1 on the DOM to a variable (primarily for testing)
+let currentBox = document.getElementById('box1')
 
-// setting the document to a variable
-// let window = window
 
-function insertLetter() {
-   testBox.innerText="T"
-//    characterCount +=1
-//    console.log(characterCount)
+/* this function takes the pressed character and puts its text into the (for now)
+testing div */
+function insertKey(e) {
+   currentBox.innerText=`${e.key}`
+   counter += 1
+   console.log(counter)
 }
 
-/* keydown event listener added to window/ need to figure out how to get
-pressed character into div box */
-window.addEventListener('keydown', insertLetter) 
+// keydown event listener added to window
+window.addEventListener('keydown', insertKey) 
 
 
 // this function randomly picks a word from wordsArray to be the answer
