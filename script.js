@@ -1,4 +1,4 @@
-console.log(document.querySelector('.box'));
+
 
 // this array contains words to be used as answers
 const wordsArray = ["movie", "eagle", "scare", "renew", "prime", "slime"]
@@ -7,13 +7,21 @@ let wordGuess = null
 let testedLetter = null
 
 
-// function insertLetter() {
-    // entry.innerHTML="T";
-// }
-// entry.addEventListener('keypress', insertLetter) 
+// setting #div1 on the DOM to a variable
+let testBox = document.getElementById('box1')
 
+// setting the document to a variable
+// let window = window
 
+function insertLetter() {
+   testBox.innerText="T"
+//    characterCount +=1
+//    console.log(characterCount)
+}
 
+/* keydown event listener added to window/ need to figure out how to get
+pressed character into div box */
+window.addEventListener('keydown', insertLetter) 
 
 
 // this function randomly picks a word from wordsArray to be the answer
@@ -62,4 +70,4 @@ function startGame() {
     checkAnswer()
 }
 
-// startGame()
+startGame()
