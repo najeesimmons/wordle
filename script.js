@@ -7,6 +7,7 @@ let counter = 0
 let guesses = 0
 let wordGuessArray = []
 
+
 // this function takes the pressed character and puts its text into the current div
 
 function insertKey(e) {
@@ -69,6 +70,7 @@ function checkAnswer() {
                 }
                 if (testedLetter === randomWordArray[j]) {
                     console.log(`The letter "${testedLetter}" is in this word, but this is not its' correct place.`)
+
                 } 
                 if (testedLetter !== randomWordArray[j]) {
                     console.log(`The letter "${testedLetter}" does not belong in this position.`)
@@ -77,9 +79,9 @@ function checkAnswer() {
         } else {
             console.log(`"${wordGuessArray[i]}" is the correct letter, in the correct place.`)
         }
+        }
         wordGuessArray = []
         console.log(`Your next guess now consists of "${wordGuessArray}"`)
-        }
     }
 }
 
