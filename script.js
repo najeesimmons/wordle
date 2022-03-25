@@ -64,7 +64,6 @@ function checkAnswer() {
             // need to take testedLetter and loop through random word to see if it appears elsewhere
             for (let j = 0; j < randomWordArray.length; j++) {
                 // I WANT TO SKIP INDEX IN FOR LOOP "j" WHEN IT IS THE SAME
-                // AS FOR LOOP HERE "i"
                 if (j === i) {
                     continue;
                 }
@@ -78,6 +77,8 @@ function checkAnswer() {
         } else {
             console.log(`"${wordGuessArray[i]}" is the correct letter, in the correct place.`)
         }
+        wordGuessArray = []
+        console.log(`Your next guess now consists of "${wordGuessArray}"`)
         }
     }
 }
