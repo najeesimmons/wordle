@@ -8,14 +8,19 @@ let counter = 0
 
 
 // setting #div1 on the DOM to a variable (primarily for testing)
-let currentBox = document.getElementById('box1')
+// let currentBox = document.getElementById('box1')
 
 
 /* this function takes the pressed character and puts its text into the (for now)
 testing div */
 function insertKey(e) {
-   currentBox.innerText=`${e.key}`
    counter += 1
+
+// varios syntax options to make the currentBox variable dynamic/ responseive to insertKey
+//    let currentBox = document.getElementById(`box${counter}`)
+//    let currentBox = document.getElementById('box'+counter.toString())
+   let currentBox = document.getElementById('box'+`${counter}`)
+   currentBox.innerText=`${e.key}`
    console.log(counter)
 }
 
