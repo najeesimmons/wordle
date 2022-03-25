@@ -49,10 +49,13 @@ function wordSelector() {
 // this will check whether the player's guess is the right answer
 // it will check each letter and compare against randomWord
 function checkAnswer() {
-    let randomWordArray = randomWord.split("") 
-    // wordGuess = prompt("Guess the word!");
-    // console.log(`Your guess is "${wordGuess}"`)
-    // let wordGuessArray = wordGuess.split("")
+    let randomWordArray = randomWord.split("")
+    if (JSON.stringify(wordGuessArray) === JSON.stringify(randomWordArray)) {
+        alert("You guessed the correct word!")
+        console.log("You win!")
+        window.removeEventListener('keydown', insertKey) 
+        return
+    } else {
     for (let i = 0; i < randomWordArray.length; i++) {
         if (randomWordArray[i] !== wordGuessArray[i]) {
             // turn currently examined wrong letter from the randomWordArray into variable testedLetter
@@ -65,7 +68,6 @@ function checkAnswer() {
                 if (j === i) {
                     continue;
                 }
-               
                 if (testedLetter === randomWordArray[j]) {
                     console.log(`The letter "${testedLetter}" is in this word, but this is not its' correct place.`)
                 } 
@@ -75,6 +77,7 @@ function checkAnswer() {
             }
         } else {
             console.log(`"${wordGuessArray[i]}" is the correct letter, in the correct place.`)
+        }
         }
     }
 }
