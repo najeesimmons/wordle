@@ -13,3 +13,18 @@
     /* Another trick to vertically center text is to set line-height property with a value that is equal to the height property: */
     line-height: 75px;
 }
+
+.right-guess{
+    background-color: green;
+    color: white;
+}
+
+.wrong-guess {
+    background-color: gray;
+    color: white;
+}
+
+.right-letter-wrong-place {
+    background-color: yellow;
+    color: white
+}
