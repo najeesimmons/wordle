@@ -5,32 +5,36 @@ let wordGuess = null
 let testedLetter = null
 let counter = 0
 let guesses = 0
+let wordGuessArray = []
 
 // this function takes the pressed character and puts its text into the current div
 
 function insertKey(e) {
+    //insertKey also needs to handle pushing entry into wordGuessArray
     if (e.key === "Enter" && counter % 5 === 0) {
-        window.removeEventListener('keydown', insertKey)
-        console.log("Next, we will run checkAnswer here.")
+        console.log("Next, we will run checkAnswer.")
+        checkAnswer()
     } 
     if (e.key != "Enter" && counter % 5 != 0) {
-        // alert("Please make a complete 5 letter guess before submitting.")
         console.log("Keep guessing letters...")
     } 
+    if (e.key != "Enter") {
+        counter += 1
+        
+        //make the currentBox variable dynamic/ responsive to insertKey
+        let currentBox = document.getElementById(`box${counter}`)
 
-    counter += 1
-
-    //make the currentBox variable dynamic/ responsive to insertKey
-    let currentBox = document.getElementById(`box${counter}`)
-    
-   // if counter >= 31, insertKey must NOT add innerText as there are no more boxes
-    if (counter >= "31") {
-       return
-   }
-    currentBox.innerText=`${e.key}`
-    console.log(counter)
+        // if counter >= 31, insertKey must NOT add innerText as there are no more boxes
+        if (counter >= "31") {
+            return
+        }
+        wordGuessArray.push(`${e.key}`)
+        currentBox.innerText=`${e.key}`
+        console.log(counter)
+        console.log(`Your guess so far consists of "${wordGuessArray}"`)
+        }
     }
-
+     
 // keydown event listener added to window
 window.addEventListener('keydown', insertKey) 
 
@@ -46,9 +50,9 @@ function wordSelector() {
 // it will check each letter and compare against randomWord
 function checkAnswer() {
     let randomWordArray = randomWord.split("") 
-    wordGuess = prompt("Guess the word!");
-    console.log(`Your guess is "${wordGuess}"`)
-    let wordGuessArray = wordGuess.split("")
+    // wordGuess = prompt("Guess the word!");
+    // console.log(`Your guess is "${wordGuess}"`)
+    // let wordGuessArray = wordGuess.split("")
     for (let i = 0; i < randomWordArray.length; i++) {
         if (randomWordArray[i] !== wordGuessArray[i]) {
             // turn currently examined wrong letter from the randomWordArray into variable testedLetter
@@ -75,10 +79,7 @@ function checkAnswer() {
     }
 }
 
-// this function will initate the game and all funcitons needed to play
-function startGame() {
-    wordSelector()
-    checkAnswer()
-}
+// this function will initate the game by choosing a word
+wordSelector()
 
-// startGame()
+
