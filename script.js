@@ -4,23 +4,32 @@ let randomWord = null
 let wordGuess = null
 let testedLetter = null
 let counter = 0
+let guesses = 0
 
 // this function takes the pressed character and puts its text into the current div
 
 function insertKey(e) {
-   counter += 1
+    if (e.key === "Enter" && counter % 5 === 0) {
+        window.removeEventListener('keydown', insertKey)
+        console.log("Next, we will run checkAnswer here.")
+    } 
+    if (e.key != "Enter" && counter % 5 != 0) {
+        // alert("Please make a complete 5 letter guess before submitting.")
+        console.log("Keep guessing letters...")
+    } 
 
-// SYNTAX OPTIONS to make the currentBox variable dynamic/ responseive to insertKey
-// let currentBox = document.getElementById(`box${counter}`)
-// let currentBox = document.getElementById('box'+counter.toString())
-   let currentBox = document.getElementById('box'+`${counter}`)
+    counter += 1
+
+    //make the currentBox variable dynamic/ responsive to insertKey
+    let currentBox = document.getElementById(`box${counter}`)
+    
    // if counter >= 31, insertKey must NOT add innerText as there are no more boxes
-   if (counter >= "31") {
+    if (counter >= "31") {
        return
    }
-   currentBox.innerText=`${e.key}`
-   console.log(counter)
-}
+    currentBox.innerText=`${e.key}`
+    console.log(counter)
+    }
 
 // keydown event listener added to window
 window.addEventListener('keydown', insertKey) 
@@ -72,4 +81,4 @@ function startGame() {
     checkAnswer()
 }
 
-startGame()
+// startGame()
