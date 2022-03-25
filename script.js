@@ -3,22 +3,16 @@ const wordsArray = ["movie", "eagle", "scare", "renew", "prime", "slime"]
 let randomWord = null
 let wordGuess = null
 let testedLetter = null
-// counter variable declare globally 
 let counter = 0
 
+// this function takes the pressed character and puts its text into the current div
 
-// setting #div1 on the DOM to a variable (primarily for testing)
-// let currentBox = document.getElementById('box1')
-
-
-/* this function takes the pressed character and puts its text into the (for now)
-testing div */
 function insertKey(e) {
    counter += 1
 
-// VARIOUS SYNTAX OPTIONS to make the currentBox variable dynamic/ responseive to insertKey
-//    let currentBox = document.getElementById(`box${counter}`)
-//    let currentBox = document.getElementById('box'+counter.toString())
+// SYNTAX OPTIONS to make the currentBox variable dynamic/ responseive to insertKey
+// let currentBox = document.getElementById(`box${counter}`)
+// let currentBox = document.getElementById('box'+counter.toString())
    let currentBox = document.getElementById('box'+`${counter}`)
    // if counter >= 31, insertKey must NOT add innerText as there are no more boxes
    if (counter >= "31") {
