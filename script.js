@@ -16,10 +16,14 @@ testing div */
 function insertKey(e) {
    counter += 1
 
-// varios syntax options to make the currentBox variable dynamic/ responseive to insertKey
+// VARIOUS SYNTAX OPTIONS to make the currentBox variable dynamic/ responseive to insertKey
 //    let currentBox = document.getElementById(`box${counter}`)
 //    let currentBox = document.getElementById('box'+counter.toString())
    let currentBox = document.getElementById('box'+`${counter}`)
+   // if counter >= 31, insertKey must NOT add innerText as there are no more boxes
+   if (counter >= "31") {
+       return
+   }
    currentBox.innerText=`${e.key}`
    console.log(counter)
 }
