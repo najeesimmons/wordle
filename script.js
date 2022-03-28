@@ -59,8 +59,31 @@ function checkAnswer() {
             }
         }
         if (counter === 10) {
-            console.log("We're at 10!")
             for (let i = 6; i < counter+1; i++) {
+                let styleThisBox = document.getElementById(`box${i}`)
+                styleThisBox.classList.add("right-guess")
+            }
+        }
+        if (counter === 15) {
+            for (let i = 11; i < counter+1; i++) {
+                let styleThisBox = document.getElementById(`box${i}`)
+                styleThisBox.classList.add("right-guess")
+            }
+        }
+        if (counter === 20) {
+            for (let i = 16; i < counter+1; i++) {
+                let styleThisBox = document.getElementById(`box${i}`)
+                styleThisBox.classList.add("right-guess")
+            }
+        }
+        if (counter === 25) {
+            for (let i = 21; i < counter+1; i++) {
+                let styleThisBox = document.getElementById(`box${i}`)
+                styleThisBox.classList.add("right-guess")
+            }
+        }
+        if (counter === 30) {
+            for (let i = 26; i < counter+1; i++) {
                 let styleThisBox = document.getElementById(`box${i}`)
                 styleThisBox.classList.add("right-guess")
             }
