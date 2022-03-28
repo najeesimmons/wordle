@@ -52,6 +52,19 @@ function wordSelector() {
 function checkAnswer() {
     let randomWordArray = randomWord.split("")
     if (JSON.stringify(wordGuessArray) === JSON.stringify(randomWordArray)) {
+        if (counter === 5) {
+            for (let i = 1; i < counter+1; i++) {
+                let styleThisBox = document.getElementById(`box${i}`)
+                styleThisBox.classList.add("right-guess")
+            }
+        }
+        if (counter === 10) {
+            console.log("We're at 10!")
+            for (let i = 6; i < counter+1; i++) {
+                let styleThisBox = document.getElementById(`box${i}`)
+                styleThisBox.classList.add("right-guess")
+            }
+        }
         alert("You guessed the correct word!")
         console.log("You win!")
         window.removeEventListener('keydown', insertKey) 
