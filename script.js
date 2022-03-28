@@ -4,7 +4,7 @@ let randomWord = null
 let wordGuess = null
 let testedLetter = null
 let counter = 0
-let guesses = 0
+let guessCounter = 1
 let wordGuessArray = []
 
 
@@ -27,12 +27,14 @@ function insertKey(e) {
 
         // if counter >= 31, insertKey must NOT add innerText as there are no more boxes
         if (counter >= "31") {
+            window.removeEventListener('keydown', insertKey) 
             return
         }
         wordGuessArray.push(`${e.key}`)
         currentBox.innerText=`${e.key}`
         console.log(counter)
         console.log(`Your guess so far consists of "${wordGuessArray}"`)
+        currentBox.dataset.guess = `${e.key}_${guessCounter}_${wordGuessArray.length - 1}`
         }
     }
      
@@ -50,6 +52,8 @@ function wordSelector() {
 // this will check whether the player's guess is the right answer
 // it will check each letter and compare against randomWord
 function checkAnswer() {
+    guessCounter += 1
+    console.log(`You are on guess number ${guessCounter}`)
     let randomWordArray = randomWord.split("")
     if (JSON.stringify(wordGuessArray) === JSON.stringify(randomWordArray)) {
         if (counter === 5) {
@@ -105,15 +109,25 @@ function checkAnswer() {
                     continue;
                 }
                 if (testedLetter === randomWordArray[j]) {
+                    console.log(`////////////${counter}////////////`)
                     console.log(`The letter "${testedLetter}" is in this word, but this is not its' correct place.`)
-
+                    console.log(`The iterator is at ${i} and guess counter is at ${guessCounter}`)
+                    let styleThisBox = document.getElementById(`box${counter - array.length - i + 1}`)
+                    styleThisBox.classList.add("right-letter-wrong-place")
                 } 
                 if (testedLetter !== randomWordArray[j]) {
                     console.log(`The letter "${testedLetter}" does not belong in this position.`)
+                    console.log(`The iterator is at ${i} and guess counter is at ${guessCounter}`)
+                    let styleThisBox = document.getElementById(`box${counter - array.length - i + 1}`)
+                    styleThisBox.classList.add("wrong-guess")
                 }
             }
         } else {
             console.log(`"${wordGuessArray[i]}" is the correct letter, in the correct place.`)
+            console.log(`the coutner is at ${counter}`)
+            console.log(`The iterator is at ${i} and guess counter is at ${guessCounter}`)
+            let styleThisBox = document.getElementById(`box${counter - array.length - i + 1}`)
+            styleThisBox.classList.add("right-guess")
         }
         }
         wordGuessArray = []
