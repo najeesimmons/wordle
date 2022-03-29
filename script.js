@@ -2,10 +2,15 @@
 const wordsArray = ["movie", "eagle", "scare", "renew", "prime", "slime"]
 let randomWord = null
 let wordGuess = null
-let testedLetter = null
 let counter = 0
 let guessCounter = 0
-let wordGuessArray = []
+let wordGuessArray0 = []
+let wordGuessArray1 = []
+let wordGuessArray2 = []
+let wordGuessArray3 = []
+let wordGuessArray4 = []
+let wordGuessArray5 = []
+
 
 // this function takes the pressed character and puts its text into the current div
 function insertKey(e) {
@@ -13,6 +18,7 @@ function insertKey(e) {
     if (e.key === "Enter" && counter % 5 === 0) {
         console.log("Next, we will run checkAnswer.")
         checkAnswer()
+        guessCounter += 1
     } 
     if (e.key != "Enter" && counter % 5 != 0) {
         console.log("Keep guessing letters...")
@@ -28,18 +34,81 @@ function insertKey(e) {
             window.removeEventListener('keydown', insertKey) 
             return
         }
-        wordGuessArray.push(`${e.key}`)
+        if (guessCounter === 0) {
+            wordGuessArray0.push(`${e.key}`)
+            console.log(`Your guess so far consists of "${wordGuessArray0}"`)
+        }
+        if (guessCounter === 1) {
+            wordGuessArray1.push(`${e.key}`)
+            console.log(`Your guess so far consists of "${wordGuessArray1}"`)
+        }
+        if (guessCounter === 2) {
+            wordGuessArray2.push(`${e.key}`)
+            console.log(`Your guess so far consists of "${wordGuessArray2}"`)
+        }
+        if (guessCounter === 3) {
+            wordGuessArray3.push(`${e.key}`)
+            console.log(`Your guess so far consists of "${wordGuessArray3}"`)
+        }
+        if (guessCounter === 4) {
+            wordGuessArray4.push(`${e.key}`)
+            console.log(`Your guess so far consists of "${wordGuessArray4}"`)
+        }
+        if (guessCounter === 5) {
+            wordGuessArray5.push(`${e.key}`)
+            console.log(`Your guess so far consists of "${wordGuessArray5}"`)
+        }
         currentBox.innerText=`${e.key}`
         console.log(counter)
-        console.log(`Your guess so far consists of "${wordGuessArray}"`)
-        currentBox.dataset.guess = `${e.key}_${guessCounter}_${wordGuessArray.length - 1}`
+        
+        // currentBox.dataset.guess = `${e.key}_${guessCounter}_${wordGuessArray.length - 1}` 
         }
     }
      
 // keydown event listener added to window
 window.addEventListener('keydown', insertKey) 
 
+function getWordGuessArray () {
+    if (guessCounter === 0) {
+        return wordGuessArray0
+    }
+    if (guessCounter === 1) {
+        return wordGuessArray1
+    }
+    if (guessCounter === 2) {
+        return wordGuessArray2
+    }
+    if (guessCounter === 3) {
+        return wordGuessArray3
+    }
+    if (guessCounter === 4) {
+        return wordGuessArray4
+    }
+    if (guessCounter === 5) {
+        return wordGuessArray5
+    }
+}
 
+function getBoxRow (boxes) {
+    if (guessCounter === 0) {
+        return boxes.slice(0,5)
+    }
+    if (guessCounter === 1) {
+        return boxes.slice(5,10)
+    }
+    if (guessCounter === 2) {
+        return boxes.slice(10,16)
+    }
+    if (guessCounter === 3) {
+        return boxes.slice(16,21)
+    }
+    if (guessCounter === 4) {
+        return boxes.slice(21,26)
+    }
+    if (guessCounter === 5) {
+        return boxes.slice(26,31)
+    }
+}
 // this function randomly picks a word from wordsArray to be the answer
 function wordSelector() {
     let wordIndex = Math.floor(Math.random() * wordsArray.length)
@@ -50,10 +119,10 @@ function wordSelector() {
 // this will check whether the player's guess is the right answer
 // it will check each letter and compare against randomWord
 function checkAnswer() {
-    guessCounter += 1
-    console.log(`Guesses made: ${guessCounter}`)
-    let randomWordArray = randomWord.split("")
-    if (JSON.stringify(wordGuessArray) === JSON.stringify(randomWordArray)) {
+    let randomWordArray = randomWord.split("") 
+    const guessWordArray = getWordGuessArray()
+    console.log({guessWordArray, randomWordArray, guessCounter})
+    if (JSON.stringify(guessWordArray) === JSON.stringify(randomWordArray)) {
         if (counter === 5) {
             for (let i = 1; i < counter+1; i++) {
                 let styleThisBox = document.getElementById(`box${i}`)
@@ -97,12 +166,14 @@ function checkAnswer() {
     } else {
         let allBoxes = document.querySelectorAll('.box')
         let allBoxesForStyles = Array.from(allBoxes)
+        console.log(allBoxesForStyles)
+        const boxes = getBoxRow(allBoxesForStyles)
+        console.log(boxes)
         for (let i = 0; i < randomWordArray.length; i++) {
-            if (randomWordArray[i] !== wordGuessArray[i]) {
-                // turn currently examined wrong letter from the randomWordArray into variable testedLetter
-                testedLetter = wordGuessArray[i]
+            if (randomWordArray[i] !== guessWordArray[i]) {
+                let testedLetter = guessWordArray[i]
                 console.log(`The letter ${testedLetter} is not found at this position. Now testing to see if it's in this word at all...`)
-                // need to take testedLetter and loop through random word to see if it appears elsewhere
+                // test letter by looping through random word to see if it appears elsewhere
                 for (let j = 0; j < randomWordArray.length; j++) {
                     // I WANT TO SKIP INDEX IN FOR LOOP "j" WHEN IT IS THE SAME
                     if (j === i) {
@@ -110,28 +181,26 @@ function checkAnswer() {
                     }
                     if (testedLetter === randomWordArray[j]) {
                         console.log(`The letter "${testedLetter}" is in this word, but this is not its' correct place.`)
-                        let styleNow = allBoxesForStyles[i]
+                        let styleNow = boxes[i]
                         styleNow.classList.add('right-letter-wrong-place')
                     } 
                     if (testedLetter !== randomWordArray[j]) {
                         console.log(`The letter "${testedLetter}" does not belong in this position.`)
-                        let styleNow = allBoxesForStyles[i]
+                        let styleNow = boxes[i]
                         styleNow.classList.add('wrong-guess')
                     }
                 }
             } else {
-                console.log(`"${wordGuessArray[i]}" is the correct letter, in the correct place.`)
+                console.log(`"${guessWordArray[i]}" is the correct letter, in the correct place.`)
                 console.log(`the coutner is at ${counter}`)
-                let styleNow = allBoxesForStyles[i]
+                let styleNow = boxes[i]
                 styleNow.classList.add('right-guess')
-                
-            }
-            }
-            wordGuessArray = []
-            console.log(`Your next guess now consists of "${wordGuessArray}"`)
+            } 
         }
+        console.log(`Your next guess now consists of "${guessWordArray}"`)
+        }  
+             
 }
-
 // this function will initate the game by choosing a word
 wordSelector()
 
