@@ -97,18 +97,19 @@ function getBoxRow (boxes) {
         return boxes.slice(5,10)
     }
     if (guessCounter === 2) {
-        return boxes.slice(10,16)
+        return boxes.slice(10,15)
     }
     if (guessCounter === 3) {
-        return boxes.slice(16,21)
+        return boxes.slice(15,20)
     }
     if (guessCounter === 4) {
-        return boxes.slice(21,26)
+        return boxes.slice(20,25)
     }
     if (guessCounter === 5) {
-        return boxes.slice(26,31)
+        return boxes.slice(25)
     }
 }
+
 // this function randomly picks a word from wordsArray to be the answer
 function wordSelector() {
     let wordIndex = Math.floor(Math.random() * wordsArray.length)
@@ -198,8 +199,7 @@ function checkAnswer() {
             } 
         }
         console.log(`Your next guess now consists of "${guessWordArray}"`)
-        }  
-             
+        }     
 }
 // this function will initate the game by choosing a word
 wordSelector()
