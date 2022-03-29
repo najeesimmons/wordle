@@ -4,12 +4,10 @@ let randomWord = null
 let wordGuess = null
 let testedLetter = null
 let counter = 0
-let guessCounter = 1
+let guessCounter = 0
 let wordGuessArray = []
 
-
 // this function takes the pressed character and puts its text into the current div
-
 function insertKey(e) {
     //insertKey also needs to handle pushing entry into wordGuessArray
     if (e.key === "Enter" && counter % 5 === 0) {
@@ -53,7 +51,7 @@ function wordSelector() {
 // it will check each letter and compare against randomWord
 function checkAnswer() {
     guessCounter += 1
-    console.log(`You are on guess number ${guessCounter}`)
+    console.log(`Guesses made: ${guessCounter}`)
     let randomWordArray = randomWord.split("")
     if (JSON.stringify(wordGuessArray) === JSON.stringify(randomWordArray)) {
         if (counter === 5) {
@@ -97,42 +95,41 @@ function checkAnswer() {
         window.removeEventListener('keydown', insertKey) 
         return
     } else {
-    for (let i = 0; i < randomWordArray.length; i++) {
-        if (randomWordArray[i] !== wordGuessArray[i]) {
-            // turn currently examined wrong letter from the randomWordArray into variable testedLetter
-            testedLetter = wordGuessArray[i]
-            console.log(`The letter ${testedLetter} is not found at this position. Now testing to see if it's in this word at all...`)
-            // need to take testedLetter and loop through random word to see if it appears elsewhere
-            for (let j = 0; j < randomWordArray.length; j++) {
-                // I WANT TO SKIP INDEX IN FOR LOOP "j" WHEN IT IS THE SAME
-                if (j === i) {
-                    continue;
+        let allBoxes = document.querySelectorAll('.box')
+        let allBoxesForStyles = Array.from(allBoxes)
+        for (let i = 0; i < randomWordArray.length; i++) {
+            if (randomWordArray[i] !== wordGuessArray[i]) {
+                // turn currently examined wrong letter from the randomWordArray into variable testedLetter
+                testedLetter = wordGuessArray[i]
+                console.log(`The letter ${testedLetter} is not found at this position. Now testing to see if it's in this word at all...`)
+                // need to take testedLetter and loop through random word to see if it appears elsewhere
+                for (let j = 0; j < randomWordArray.length; j++) {
+                    // I WANT TO SKIP INDEX IN FOR LOOP "j" WHEN IT IS THE SAME
+                    if (j === i) {
+                        continue;
+                    }
+                    if (testedLetter === randomWordArray[j]) {
+                        console.log(`The letter "${testedLetter}" is in this word, but this is not its' correct place.`)
+                        let styleNow = allBoxesForStyles[i]
+                        styleNow.classList.add('right-letter-wrong-place')
+                    } 
+                    if (testedLetter !== randomWordArray[j]) {
+                        console.log(`The letter "${testedLetter}" does not belong in this position.`)
+                        let styleNow = allBoxesForStyles[i]
+                        styleNow.classList.add('wrong-guess')
+                    }
                 }
-                if (testedLetter === randomWordArray[j]) {
-                    console.log(`////////////${counter}////////////`)
-                    console.log(`The letter "${testedLetter}" is in this word, but this is not its' correct place.`)
-                    console.log(`The iterator is at ${i} and guess counter is at ${guessCounter}`)
-                    let styleThisBox = document.getElementById(`box${counter - array.length - i + 1}`)
-                    styleThisBox.classList.add("right-letter-wrong-place")
-                } 
-                if (testedLetter !== randomWordArray[j]) {
-                    console.log(`The letter "${testedLetter}" does not belong in this position.`)
-                    console.log(`The iterator is at ${i} and guess counter is at ${guessCounter}`)
-                    let styleThisBox = document.getElementById(`box${counter - array.length - i + 1}`)
-                    styleThisBox.classList.add("wrong-guess")
-                }
+            } else {
+                console.log(`"${wordGuessArray[i]}" is the correct letter, in the correct place.`)
+                console.log(`the coutner is at ${counter}`)
+                let styleNow = allBoxesForStyles[i]
+                styleNow.classList.add('right-guess')
+                
             }
-        } else {
-            console.log(`"${wordGuessArray[i]}" is the correct letter, in the correct place.`)
-            console.log(`the coutner is at ${counter}`)
-            console.log(`The iterator is at ${i} and guess counter is at ${guessCounter}`)
-            let styleThisBox = document.getElementById(`box${counter - array.length - i + 1}`)
-            styleThisBox.classList.add("right-guess")
+            }
+            wordGuessArray = []
+            console.log(`Your next guess now consists of "${wordGuessArray}"`)
         }
-        }
-        wordGuessArray = []
-        console.log(`Your next guess now consists of "${wordGuessArray}"`)
-    }
 }
 
 // this function will initate the game by choosing a word
