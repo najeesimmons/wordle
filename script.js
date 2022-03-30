@@ -11,6 +11,18 @@ let wordGuessArray3 = []
 let wordGuessArray4 = []
 let wordGuessArray5 = []
 
+// this function will initate the game by choosing a word
+wordSelector()
+
+// this function randomly picks a word from wordsArray to be the answer
+function wordSelector() {
+    let wordIndex = Math.floor(Math.random() * wordsArray.length)
+    randomWord = wordsArray[wordIndex]
+    console.log(`The word is "${randomWord}"`)
+}
+
+// keydown event listener added to window
+window.addEventListener('keydown', insertKey) 
 
 // this function takes the pressed character and puts its text into the current div
 function insertKey(e) {
@@ -20,6 +32,32 @@ function insertKey(e) {
         checkAnswer()
         guessCounter += 1
     } 
+    if (e.key === "Backspace") {
+        console.log(counter)
+        let currentBox = document.getElementById(`box${counter}`)
+        currentBox.innerText=""
+        if (guessCounter === 0) {
+            wordGuessArray0.pop()
+        }
+        if (guessCounter === 1) {
+            wordGuessArray1.pop()
+        }
+        if (guessCounter === 2) {
+            wordGuessArray2.pop()
+        }
+        if (guessCounter === 3) {
+            wordGuessArray3.pop()
+        }
+        if (guessCounter === 4) {
+            wordGuessArray4.pop()
+        }
+        if (guessCounter === 5) {
+            wordGuessArray5.pop()
+        }
+        counter -=1
+        console.log(counter)
+        return   
+    }
     if (e.key != "Enter" && counter % 5 != 0) {
         console.log("Keep guessing letters...")
     } 
@@ -64,58 +102,6 @@ function insertKey(e) {
         // currentBox.dataset.guess = `${e.key}_${guessCounter}_${wordGuessArray.length - 1}` 
         }
     }
-     
-// keydown event listener added to window
-window.addEventListener('keydown', insertKey) 
-
-function getWordGuessArray () {
-    if (guessCounter === 0) {
-        return wordGuessArray0
-    }
-    if (guessCounter === 1) {
-        return wordGuessArray1
-    }
-    if (guessCounter === 2) {
-        return wordGuessArray2
-    }
-    if (guessCounter === 3) {
-        return wordGuessArray3
-    }
-    if (guessCounter === 4) {
-        return wordGuessArray4
-    }
-    if (guessCounter === 5) {
-        return wordGuessArray5
-    }
-}
-
-function getBoxRow (boxes) {
-    if (guessCounter === 0) {
-        return boxes.slice(0,5)
-    }
-    if (guessCounter === 1) {
-        return boxes.slice(5,10)
-    }
-    if (guessCounter === 2) {
-        return boxes.slice(10,15)
-    }
-    if (guessCounter === 3) {
-        return boxes.slice(15,20)
-    }
-    if (guessCounter === 4) {
-        return boxes.slice(20,25)
-    }
-    if (guessCounter === 5) {
-        return boxes.slice(25)
-    }
-}
-
-// this function randomly picks a word from wordsArray to be the answer
-function wordSelector() {
-    let wordIndex = Math.floor(Math.random() * wordsArray.length)
-    randomWord = wordsArray[wordIndex]
-    console.log(`The word is "${randomWord}"`)
-}
 
 // this will check whether the player's guess is the right answer
 // it will check each letter and compare against randomWord
@@ -201,7 +187,53 @@ function checkAnswer() {
         console.log(`Your next guess now consists of "${guessWordArray}"`)
         }     
 }
-// this function will initate the game by choosing a word
-wordSelector()
+
+
+function getWordGuessArray () {
+    if (guessCounter === 0) {
+        return wordGuessArray0
+    }
+    if (guessCounter === 1) {
+        return wordGuessArray1
+    }
+    if (guessCounter === 2) {
+        return wordGuessArray2
+    }
+    if (guessCounter === 3) {
+        return wordGuessArray3
+    }
+    if (guessCounter === 4) {
+        return wordGuessArray4
+    }
+    if (guessCounter === 5) {
+        return wordGuessArray5
+    }
+}
+
+function getBoxRow (boxes) {
+    if (guessCounter === 0) {
+        return boxes.slice(0,5)
+    }
+    if (guessCounter === 1) {
+        return boxes.slice(5,10)
+    }
+    if (guessCounter === 2) {
+        return boxes.slice(10,15)
+    }
+    if (guessCounter === 3) {
+        return boxes.slice(15,20)
+    }
+    if (guessCounter === 4) {
+        return boxes.slice(20,25)
+    }
+    if (guessCounter === 5) {
+        return boxes.slice(25)
+    }
+}
+
+
+
+
+
 
 
