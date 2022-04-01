@@ -60,8 +60,13 @@ function insertKey(e) {
     }
     if (e.key != "Enter" && counter % 5 != 0) {
         console.log("Keep guessing letters...")
+    }
+    // What do I need to add here to stop insertKey if currentwordGuessArray are at a multiple of 5 but have not been sumbitted.?
+    if (e.key != "Enter" && counter % 5 === 0) {
+        console.log("This condition is met.")
+        return
     } 
-    if (e.key != "Enter") {
+    if (e.key != "Enter") {  
         counter += 1
         
         //make the currentBox variable dynamic/ responsive to insertKey
