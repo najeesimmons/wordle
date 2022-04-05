@@ -5,12 +5,13 @@ let wordGuess = null
 let counter = 0
 let guessCounter = 0
 
+// creating nested arrays that will store guess letters
 let rows = 6
 let guesses = new Array(rows); // create an empty array of "rows"
 for (let i = 0; i < rows; i++) {
     guesses[i] = new Array(0); // make each element an array
   }
-  console.log(guesses); //  Output: [ [ <5 empty items> ], [ <5 empty items> ], [ <5 empty items> ], [ <5 empty items> ] ]
+  console.log(guesses);
 
 // this function will initate the game by choosing a word
 wordSelector()
@@ -27,22 +28,21 @@ window.addEventListener('keydown', insertKey)
 
 // this function takes the pressed character and puts its text into the current div
 function insertKey(e) {
-    //insertKey also needs to handle pushing entry into wordGuessArray
-    if (e.key === "Enter" && counter % 5 === 0) {
+    //insertKey also needs to handle pushing entry into the nested array for the current guess
+    if (e.key === "Enter" && counter % 5 === 0 && counter > 0) {
         console.log("Next, we will run checkAnswer.")
         checkAnswer(guesses[guessCounter])
         guessCounter += 1
     }
     if (e.key === "Enter" && counter % 5 != 0) {
-        console.log("A guess MUST consist of 5 letters -- no more, no less!")
+        alert("A guess MUST consist of 5 letters -- no more, no less!")
     } 
     if (e.key === "Backspace") {
-        console.log(counter)
         let currentBox = document.getElementById(`box${counter}`)
         currentBox.innerText=""
         guesses[guessCounter].pop()
         counter -=1
-        console.log(counter)
+        console.log(`The counter is now at ${counter}`)
         return   
     }
     if (e.key != "Enter" && counter % 5 != 0) {
@@ -65,63 +65,28 @@ function insertKey(e) {
         }
         currentBox.innerText=`${e.key}`
         console.log(counter)
-        
-        // currentBox.dataset.guess = `${e.key}_${guessCounter}_${wordGuessArray.length - 1}` 
         }
     }
 
 // this will check whether the player's guess is the right answer
-// it will check each letter and compare against randomWord
+// it will check each letter of current guesses Array and compare against randomWord
 function checkAnswer() {
     let randomWordArray = randomWord.split("") 
     console.log(guesses[guessCounter], randomWordArray, guessCounter)
     if (JSON.stringify(guesses[guessCounter]) === JSON.stringify(randomWordArray)) {
-        if (counter === 5) {
-            for (let i = 1; i < counter+1; i++) {
+        for (let i = counter - 4; i < counter+1; i++) {
                 let styleThisBox = document.getElementById(`box${i}`)
                 styleThisBox.classList.add("right-guess")
             }
-        }
-        if (counter === 10) {
-            for (let i = 6; i < counter+1; i++) {
-                let styleThisBox = document.getElementById(`box${i}`)
-                styleThisBox.classList.add("right-guess")
-            }
-        }
-        if (counter === 15) {
-            for (let i = 11; i < counter+1; i++) {
-                let styleThisBox = document.getElementById(`box${i}`)
-                styleThisBox.classList.add("right-guess")
-            }
-        }
-        if (counter === 20) {
-            for (let i = 16; i < counter+1; i++) {
-                let styleThisBox = document.getElementById(`box${i}`)
-                styleThisBox.classList.add("right-guess")
-            }
-        }
-        if (counter === 25) {
-            for (let i = 21; i < counter+1; i++) {
-                let styleThisBox = document.getElementById(`box${i}`)
-                styleThisBox.classList.add("right-guess")
-            }
-        }
-        if (counter === 30) {
-            for (let i = 26; i < counter+1; i++) {
-                let styleThisBox = document.getElementById(`box${i}`)
-                styleThisBox.classList.add("right-guess")
-            }
-        }
         alert("You guessed the correct word!")
         console.log("You win!")
-        window.removeEventListener('keydown', insertKey) 
+        window.removeEventListener('keydown', insertKey)
+        alert("Refresh page to play again!")
         return
     } else {
         let allBoxes = document.querySelectorAll('.box')
         let allBoxesForStyles = Array.from(allBoxes)
-        console.log(allBoxesForStyles)
         const boxes = getBoxRow(allBoxesForStyles)
-        console.log(boxes)
         for (let i = 0; i < randomWordArray.length; i++) {
             if (randomWordArray[i] !== guesses[guessCounter][i]) {
                 let testedLetter = guesses[guessCounter][i]
@@ -150,34 +115,9 @@ function checkAnswer() {
                 styleNow.classList.add('right-guess')
             } 
         }
-        console.log(`Your next guess now consists of "${guesses[guessCounter]}"`)
-        }     
+    }     
 }
 
 function getBoxRow (boxes) {
-    if (guessCounter === 0) {
-        return boxes.slice(0,5)
+        return boxes.slice(counter -5, counter)
     }
-    if (guessCounter === 1) {
-        return boxes.slice(5,10)
-    }
-    if (guessCounter === 2) {
-        return boxes.slice(10,15)
-    }
-    if (guessCounter === 3) {
-        return boxes.slice(15,20)
-    }
-    if (guessCounter === 4) {
-        return boxes.slice(20,25)
-    }
-    if (guessCounter === 5) {
-        return boxes.slice(25)
-    }
-}
-
-
-
-
-
-
-
