@@ -49,7 +49,6 @@ function insertKey(e) {
     if (e.key != "Enter" && counter % 5 != 0) {
         console.log("Keep guessing letters...")
     }
-    
     if (e.key != "Enter") {  
         counter += 1
         
