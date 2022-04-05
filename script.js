@@ -37,7 +37,9 @@ function insertKey(e) {
     if (e.key === "Enter" && guesses[guessCounter].length != 5) {
         console.log(guesses[guessCounter] , guesses[guessCounter].length)
         alert("A guess MUST consist of 5 letters -- no more, no less!")
-    } 
+    }
+    if (e.key === "Backspace" && guesses[guessCounter].length === 0)
+        return
     if (e.key === "Backspace") {
         let currentBox = document.getElementById(`box${counter}`)
         currentBox.innerText=""
