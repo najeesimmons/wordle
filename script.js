@@ -33,7 +33,7 @@ function insertKey(e) {
         guessCounter += 1
     }
     if (e.key === "Enter" && counter % 5 != 0) {
-        console.log("A guess can only consist of 5 letters!")
+        console.log("A guess MUST consist of 5 letters -- no more, no less!")
     } 
     if (e.key === "Backspace") {
         console.log(counter)
