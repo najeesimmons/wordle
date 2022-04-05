@@ -1,8 +1,27 @@
+h1 {
+    text-align: center;
+}
+
+.layout {
+    display: flex;
+}
+
+.instructions {
+    width: 395px;
+    height: 487 px;
+    margin-left: 20px;
+}
+
 .game-board {
     display: grid;
     grid-template-columns: repeat(5, 75px);
     grid-gap: 5px;
-   
+    margin-right: 20px;
+    margin-top: 16px
+}
+
+.caveat {
+    font-style: italic
 }
 
 .box {
