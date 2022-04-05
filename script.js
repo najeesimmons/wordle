@@ -31,6 +31,9 @@ function insertKey(e) {
         console.log("Next, we will run checkAnswer.")
         checkAnswer()
         guessCounter += 1
+    }
+    if (e.key === "Enter" && counter % 5 != 0) {
+        console.log("A guess can only consist of 5 letters!")
     } 
     if (e.key === "Backspace") {
         console.log(counter)
@@ -62,38 +65,38 @@ function insertKey(e) {
         console.log("Keep guessing letters...")
     }
     // What do I need to add here to stop insertKey if currentwordGuessArray are at a multiple of 5 but have not been sumbitted.?
-    if (e.key != "Enter" && counter > 0 && counter % 5 === 0) {
-        if (guessCounter === 0) {
-            if (wordGuessArray0.length % 5 == 0)
-            console.log("Press ENTER to submit yuor guess")
-            return
-        }
-        if (guessCounter === 1) {
-            if (wordGuessArray1.length % 5 == 0)
-            console.log("Press ENTER to submit yuor guess")
-            return
-        }
-        if (guessCounter === 2) {
-            if (wordGuessArray2.length % 5 == 0)
-            console.log("Press ENTER to submit yuor guess")
-            return
-        }
-        if (guessCounter === 3) {
-            if (wordGuessArray3.length % 5 == 0)
-            console.log("Press ENTER to submit yuor guess")
-            return
-        }
-        if (guessCounter === 4) {
-            if (wordGuessArray4.length % 5 == 0)
-            console.log("Press ENTER to submit yuor guess")
-            return
-        }
-        if (guessCounter === 5) {
-            if (wordGuessArray5.length % 5 == 0)
-            console.log("Press ENTER to submit yuor guess")
-            return
-        }
-    }       
+    // if (e.key != "Enter" && counter > 0 && counter % 5 === 0) {
+    //     if (guessCounter === 0) {
+    //         if (wordGuessArray0.length % 5 == 0)
+    //         console.log("Press ENTER to submit your guess")
+    //         return
+    //     }
+    //     if (guessCounter === 1) {
+    //         if (wordGuessArray1.length % 5 == 0)
+    //         console.log("Press ENTER to submit your guess")
+    //         return
+    //     }
+    //     if (guessCounter === 2) {
+    //         if (wordGuessArray2.length % 5 == 0)
+    //         console.log("Press ENTER to submit your guess")
+    //         return
+    //     }
+    //     if (guessCounter === 3) {
+    //         if (wordGuessArray3.length % 5 == 0)
+    //         console.log("Press ENTER to submit your guess")
+    //         return
+    //     }
+    //     if (guessCounter === 4) {
+    //         if (wordGuessArray4.length % 5 == 0)
+    //         console.log("Press ENTER to submit your guess")
+    //         return
+    //     }
+    //     if (guessCounter === 5) {
+    //         if (wordGuessArray5.length % 5 == 0)
+    //         console.log("Press ENTER to submit your guess")
+    //         return
+    //     }
+    // }       
     if (e.key != "Enter") {  
         counter += 1
         
