@@ -26,7 +26,7 @@ for (let i = 0; i < keys.length; i++) {
 }
 
 // this array contains words to be used as answers
-const wordsArray = ["movie", "scare", "clear", "crime", "slime", "clash"]
+const wordsArray = ["movie", "scare", "clear", "crime", "slime", "clash", "great", "smear", "snail", "grant", "drain", "quote", "query", "claim", "solve", "prone", "prance"]
 let randomWord = null
 let wordGuess = null
 let counter = 0
