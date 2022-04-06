@@ -21,7 +21,6 @@ const keys = document.querySelectorAll('.keyboard-row button')
 for (let i = 0; i < keys.length; i++) {
     keys[i].onclick = ({target}) => {
         const key = target.getAttribute("data-key")
-
         console.log(key)
     }
 }
@@ -32,6 +31,8 @@ let randomWord = null
 let wordGuess = null
 let counter = 0
 let guessCounter = 0
+// I will use guesslength to toggle length of guesses
+let guesslength
 
 // creating nested arrays that will store guess letters
 let rows = 6
@@ -70,7 +71,6 @@ function insertKey(e) {
         counter += 1
         //make the currentBox variable dynamic/ responsive to insertKey
         let currentBox = document.getElementById(`${counter}`)
-        console.log(counter)
         // if counter >= 31, insertKey must NOT add innerText as there are no more boxes
         if (counter >= "31") {
             window.removeEventListener('keydown', insertKey) 
@@ -80,7 +80,6 @@ function insertKey(e) {
             console.log(`Your guess so far consists of "${guesses[guessCounter]}"`)
         }
         currentBox.innerText=`${e.key}`
-        console.log(counter)
         }
     }
 
@@ -97,7 +96,6 @@ function checkAnswer() {
         alert("You guessed the correct word! Refresh page to play again!")
         console.log("You win!")
         window.removeEventListener('keydown', insertKey)
-        return
     } else {
         let allBoxes = document.querySelectorAll('.square')
         let allBoxesForStyles = Array.from(allBoxes)
@@ -148,9 +146,9 @@ function handleBackspace () {
     }
 function handleEnter() {
     if (counter % 5 === 0 && guesses[guessCounter].length === 5) {
-        console.log("Next, we will run checkAnswer.")
         checkAnswer(guesses[guessCounter])
         guessCounter += 1
+        console.log(guessCounter)
         return
     }
     if (guesses[guessCounter].length != 5) {

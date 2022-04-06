@@ -63,6 +63,7 @@ header {
     color: white;
     line-height: 64px;
     text-align: center;
+    font-size: 25px;
 }
 
 #keyboard-container {
@@ -107,7 +108,7 @@ header {
 }
 
 .wrong-guess {
-    background-color: gray;
+    background-color: rgb(92, 90, 90);
     color: white;
 }
 
