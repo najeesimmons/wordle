@@ -31,6 +31,8 @@ h1 {
     text-align: center;
     /* Another trick to vertically center text is to set line-height property with a value that is equal to the height property: */
     line-height: 75px;
+    /* added to enable animation of children nodes */
+    transform: translate(-50%, -50%)
 }
 
 .right-guess{
