@@ -13,7 +13,6 @@ document.addEventListener("DOMContentLoaded", () => {
             gameboard.appendChild(square);
         }
     }
-    
 })
 
 // adding functionlality for on screen keyboard to collect letter data
