@@ -1,9 +1,12 @@
 h1 {
     margin-left: 275px;
+    margin-bottom: 50px;
 }
 
 .layout {
     display: flex;
+    margin-left: 100px;
+    margin-top: 20px;
 }
 
 .instructions {
