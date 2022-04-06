@@ -56,32 +56,18 @@ window.addEventListener('keydown', insertKey)
 // this function takes the pressed character and puts its text into the current div
 function insertKey(e) {
     //insertKey also needs to handle pushing entry into the nested array for the current guess
-    if (e.key === "Enter" && counter % 5 === 0 && guesses[guessCounter].length === 5) {
-        console.log("Next, we will run checkAnswer.")
-        checkAnswer(guesses[guessCounter])
-        guessCounter += 1
-        return
-    }
-    if (e.key === "Enter" && guesses[guessCounter].length != 5) {
-        console.log(guesses[guessCounter] , guesses[guessCounter].length)
-        alert("A guess MUST consist of 5 letters -- no more, no less!")
-    }
-    if (e.key === "Backspace" && guesses[guessCounter].length === 0)
-        return
     if (e.key === "Backspace") {
-        let currentBox = document.getElementById(`${counter}`)
-        currentBox.innerText=""
-        guesses[guessCounter].pop()
-        counter -=1
-        console.log(`The counter is now at ${counter}`)
+        handleBackspace()
         return   
     }
-    if (e.key != "Enter" && counter % 5 != 0) {
-        console.log("Keep guessing letters...")
+    if (e.key === "Enter") {
+        handleEnter()
     }
-    if (e.key != "Enter") {  
+    if (e.key != "Enter") {
+        if (guesses[guessCounter].length === 5) {
+            return
+        }
         counter += 1
-        
         //make the currentBox variable dynamic/ responsive to insertKey
         let currentBox = document.getElementById(`${counter}`)
         console.log(counter)
@@ -150,3 +136,25 @@ function checkAnswer() {
 function getBoxRow (boxes) {
         return boxes.slice(counter -5, counter)
     }
+
+function handleBackspace () {
+    if (guesses[guessCounter].length === 0) {
+        return
+    }
+    let currentBox = document.getElementById(`${counter}`)
+        currentBox.innerText=""
+        guesses[guessCounter].pop()
+        counter -=1
+    }
+function handleEnter() {
+    if (counter % 5 === 0 && guesses[guessCounter].length === 5) {
+        console.log("Next, we will run checkAnswer.")
+        checkAnswer(guesses[guessCounter])
+        guessCounter += 1
+        return
+    }
+    if (guesses[guessCounter].length != 5) {
+        console.log(guesses[guessCounter] , guesses[guessCounter].length)
+        alert("A guess MUST consist of 5 letters -- no more, no less!")
+    }
+}
