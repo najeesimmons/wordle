@@ -56,16 +56,6 @@ function insertKey(e) {
         
         //make the currentBox variable dynamic/ responsive to insertKey
         let currentBox = document.getElementById(`box${counter}`)
-        let theCard = document.createElement("div")
-        currentBox.appendChild(theCard)
-        theCard.classList.add("the-card")
-        let theFront = document.createElement("div")
-        theCard.appendChild(theFront)
-        theFront.classList.add("the-front")
-        let theBack = document.createElement("div")
-        theCard.appendChild(theBack)
-        theFront.classList.add("the-back")
-
         // if counter >= 31, insertKey must NOT add innerText as there are no more boxes
         if (counter >= "31") {
             window.removeEventListener('keydown', insertKey) 

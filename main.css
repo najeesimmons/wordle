@@ -6,7 +6,6 @@ h1 {
 .layout {
     display: flex;
     margin-left: 100px;
-    margin-top: 20px;
 }
 
 .instructions {
