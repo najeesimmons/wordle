@@ -7,53 +7,57 @@
     <title>Wordle</title>
     <link rel="stylesheet" href="main.css">
 </head>
+
 <body>
-    <h1>Welcome to WORDLE!</h1>
-    <div class="layout">
-    
-    <div class="game-board">
-        <div id="box1" class="box"></div>
-        <div id="box2" class="box"></div>
-        <div id="box3" class="box"></div>
-        <div id="box4" class="box"></div>
-        <div id="box5" class="box"></div>
-        <div id="box6" class="box"></div>
-        <div id="box7" class="box"></div>
-        <div id="box8" class="box"></div>
-        <div id="box9" class="box"></div>
-        <div id="box10" class="box"></div>
-        <div id="box11" class="box"></div>
-        <div id="box12" class="box"></div>
-        <div id="box13" class="box"></div>
-        <div id="box14" class="box"></div>
-        <div id="box15" class="box"></div>
-        <div id="box16" class="box"></div>
-        <div id="box17" class="box"></div>
-        <div id="box18" class="box"></div>
-        <div id="box19" class="box"></div>
-        <div id="box20" class="box"></div>
-        <div id="box21" class="box"></div>
-        <div id="box22" class="box"></div>
-        <div id="box23" class="box"></div>
-        <div id="box24" class="box"></div>
-        <div id="box25" class="box"></div>
-        <div id="box26" class="box"></div>
-        <div id="box27" class="box"></div>
-        <div id="box28" class="box"></div>
-        <div id="box29" class="box"></div>
-        <div id="box30" class="box"></div>
-    </div>
-    <div class="instructions">
-        <h2>Hello!</h1>
-
-        <p>Guess the WORDLE in six tries.</p>
-
-        <p>Each guess must be a valid five-letter word. Hit the enter button to submit. </p>
-            
-        <p class="caveat">(This feature isn't working yet, you can still guess nonsense 😜 ).</p>
-
-        <p>After each guess, the color of the tiles will change to show how close your guess was to the word.</p>
-    </div>
+    <div id="container">
+        <div id="game">
+            <header>
+                <h1 class="title">Welcome to WORDLE!</h1>
+            </header>
+        
+            <div id="board-container">
+                <div id="board"></div>
+            </div>
+       
+            <div id="keyboard-container">
+                <div class="keyboard-row">
+                <button data-key="q">q</button>
+                <button data-key="w">w</button>
+                <button data-key="e">e</button>
+                <button data-key="r">r</button>
+                <button data-key="t">t</button>
+                <button data-key="y">y</button>
+                <button data-key="u">u</button>
+                <button data-key="i">i</button>
+                <button data-key="o">o</button>
+                <button data-key="p">p</button>
+                </div>
+                <div class="keyboard-row">
+                <div class="spacer-half"></div>
+                <button data-key="a">a</button>
+                <button data-key="s">s</button>
+                <button data-key="d">d</button>
+                <button data-key="f">f</button>
+                <button data-key="g">g</button>
+                <button data-key="h">h</button>
+                <button data-key="j">j</button>
+                <button data-key="k">k</button>
+                <button data-key="l">l</button>
+                <div class="spacer-half"></div>
+                </div>
+                <div class="keyboard-row">
+                <button data-key="enter" class="wide-button">Enter</button>
+                <button data-key="z">z</button>
+                <button data-key="x">x</button>
+                <button data-key="c">c</button>
+                <button data-key="v">v</button>
+                <button data-key="b">b</button>
+                <button data-key="n">n</button>
+                <button data-key="m">m</button>
+                <button data-key="del" class="wide-button">Del</button>
+                </div>
+            </div>    
+        </div>
     </div>
 </body>
 <script src="script.js"></script>

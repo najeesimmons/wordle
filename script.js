@@ -1,3 +1,32 @@
+
+// create divs within the board html element
+document.addEventListener("DOMContentLoaded", () => {
+    createSquares();
+
+    function createSquares() {
+        const gameboard = document.getElementById("board")
+
+        for (let i = 0; i < 30; i ++) {
+            let square = document.createElement("div")
+            square.classList.add("square")
+            square.setAttribute("id", i + 1)
+            gameboard.appendChild(square);
+        }
+    }
+    
+})
+
+// adding functionlality for on screen keyboard to collect letter data
+const keys = document.querySelectorAll('.keyboard-row button')
+
+for (let i = 0; i < keys.length; i++) {
+    keys[i].onclick = ({target}) => {
+        const key = target.getAttribute("data-key")
+
+        console.log(key)
+    }
+}
+
 // this array contains words to be used as answers
 const wordsArray = ["movie", "scare", "clear", "crime", "slime", "clash"]
 let randomWord = null
@@ -41,7 +70,7 @@ function insertKey(e) {
     if (e.key === "Backspace" && guesses[guessCounter].length === 0)
         return
     if (e.key === "Backspace") {
-        let currentBox = document.getElementById(`box${counter}`)
+        let currentBox = document.getElementById(`${counter}`)
         currentBox.innerText=""
         guesses[guessCounter].pop()
         counter -=1
@@ -55,7 +84,8 @@ function insertKey(e) {
         counter += 1
         
         //make the currentBox variable dynamic/ responsive to insertKey
-        let currentBox = document.getElementById(`box${counter}`)
+        let currentBox = document.getElementById(`${counter}`)
+        console.log(counter)
         // if counter >= 31, insertKey must NOT add innerText as there are no more boxes
         if (counter >= "31") {
             window.removeEventListener('keydown', insertKey) 
@@ -76,7 +106,7 @@ function checkAnswer() {
     console.log(guesses[guessCounter], randomWordArray, guessCounter)
     if (JSON.stringify(guesses[guessCounter]) === JSON.stringify(randomWordArray)) {
         for (let i = counter - 4; i < counter+1; i++) {
-                let styleThisBox = document.getElementById(`box${i}`)
+                let styleThisBox = document.getElementById(`${i}`)
                 styleThisBox.classList.add("right-guess")
             }
         alert("You guessed the correct word! Refresh page to play again!")
@@ -84,7 +114,7 @@ function checkAnswer() {
         window.removeEventListener('keydown', insertKey)
         return
     } else {
-        let allBoxes = document.querySelectorAll('.box')
+        let allBoxes = document.querySelectorAll('.square')
         let allBoxesForStyles = Array.from(allBoxes)
         const boxes = getBoxRow(allBoxesForStyles)
         for (let i = 0; i < randomWordArray.length; i++) {
