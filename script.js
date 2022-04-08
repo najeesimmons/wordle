@@ -15,13 +15,18 @@ document.addEventListener("DOMContentLoaded", () => {
 })
 
 // this array contains words to be used as answers
-const wordsArray = ["movie", "scare", "clear", "crime", "slime", "clash", "great", "smear", "snail", "grant", "drain", "quote", "query", "claim", "solve", "prone", "prance"]
+const wordsArray = ["movie", "scare", "clear", "crime", "slime", "clash", "great", "smear", "snail", "grant", "drain", "quote", "query", "claim", "solve", "prone"]
 let randomWord = null
 let wordGuess = null
 let counter = 0
 let guessCounter = 0
 
 // this function will initate the game by choosing a word from wordsArray
+function wordSelector() {
+    let wordIndex = Math.floor(Math.random() * wordsArray.length)
+    randomWord = wordsArray[wordIndex].toUpperCase()
+    console.log(`The word is "${randomWord}"`)
+}
 wordSelector()
 
 // creating nested arrays that will store guess letters
@@ -31,7 +36,15 @@ for (let i = 0; i < rows; i++) {
     guesses[i] = new Array(0); // make each element an array
   }
 
+// keydown event listener added to window
+window.addEventListener('keydown', getKey)
 
+function getKey(e) {
+    console.log((e.which))
+    let pressedKey = e.which
+    console.log(pressedKey)
+    paintKey(pressedKey)
+}
 
 // grabbing all keyboard buttons on the DOM
 const keys = document.querySelectorAll('.keyboard-row button')
@@ -41,20 +54,17 @@ for (let i = 0; i < keys.length; i++) {
     // the "target parameter is the key press 'on click'
     keys[i].onclick = ({target}) => {
         // assingning "data key" attribute (letter) to a variable 
-        const digitalKeyPress = target.getAttribute("data-key")
+        const pressedKey = parseInt(target.getAttribute("data-key"))
+        console.log(pressedKey)
         target.blur()
-        insertDigitalKeyPress(digitalKeyPress)
+        paintKey(pressedKey)
     }
 }
-
-   
-// keydown event listener added to window
-window.addEventListener('keydown', insertTypedKey) 
 
 // this will check whether the player's guess is the right answer
 // it will check each letter of current guesses Array and compare against randomWord
 function checkAnswer() {
-    let randomWordArray = randomWord.split("") 
+    let randomWordArray = randomWord.split("")
     console.log(guesses[guessCounter], randomWordArray, guessCounter)
     if (JSON.stringify(guesses[guessCounter]) === JSON.stringify(randomWordArray)) {
         for (let i = counter - 4; i < counter+1; i++) {
@@ -63,7 +73,7 @@ function checkAnswer() {
             }
         alert("You guessed the correct word! Refresh page to play again!")
         console.log("You win!")
-        window.removeEventListener('keydown', insertTypedKey)
+        window.removeEventListener('keydown', paintKey)
     } else {
         let allBoxes = document.querySelectorAll('.square')
         let allBoxesForStyles = Array.from(allBoxes)
@@ -99,71 +109,44 @@ function checkAnswer() {
     }     
 }
 
-// this function randomly picks a word from wordsArray to be the answer
-function wordSelector() {
-    let wordIndex = Math.floor(Math.random() * wordsArray.length)
-    randomWord = wordsArray[wordIndex]
-    console.log(`The word is "${randomWord}"`)
-}
 // this will paint the digitally pressed key "letter" on the DOM at the "current" div
-function insertDigitalKeyPress (digitalKeyPress) {
-    // make sure that the guessArray isn't full
-    if (digitalKeyPress == "del") {
+function paintKey (pressedKey) {
+    // space bar
+    if (pressedKey === 32) {
+        return
+    }
+    // backspace
+    if (pressedKey === 8) {
         handleBackspace()
         return
     }
-    if (digitalKeyPress === "enter") {
+    // enter
+    if (pressedKey === 13) {
         handleEnter()
         return
     }
+    // if current guess is already full, do NOTHING
     if (guesses[guessCounter].length === 5) {
         return
     }
     // if counter >= 31, insertKey must NOT add innerText as there are no more boxes
     if (counter >= "31") { 
         return
-    } else {
-        // increse counter/tracker
-        counter += 1
-        //make the currentBox variable dynamic/ responsive to insertKey
-        let currentBox = document.getElementById(`${counter}`)
-        guesses[guessCounter].push(`${digitalKeyPress}`)
-        console.log(`Your guess so far consists of "${guesses[guessCounter]}"`)
-        currentBox.innerText=`${digitalKeyPress}`
-        }
-    }
-
-    // this function takes the pressed character and puts its text into the current div
-function insertTypedKey(e) {
-    //insertKey also needs to handle pushing entry into the nested array for the current guess
-    let entry = e.key
-    if (entry === " ") {
-        return
-    }
-    if (entry === "Backspace") {
-        handleBackspace()
-        return   
-    }
-    if (entry === "Enter") {
-        handleEnter()
-    }
-    if (entry != "Enter") {
+    } 
+    if (pressedKey >= 65 && pressedKey <= 90) {
         if (guesses[guessCounter].length === 5) {
             return
-        }
-        counter += 1
-        //make the currentBox variable dynamic/ responsive to insertKey
-        let currentBox = document.getElementById(`${counter}`)
-        // if counter >= 31, insertKey must NOT add innerText as there are no more boxes
-        if (counter >= "31") {
-            window.removeEventListener('keydown', insertKey) 
-            return
-        } else {
-            guesses[guessCounter].push(`${entry}`)
+            }
+            counter += 1
+            //make the currentBox variable dynamic/ responsive to insertKey
+            let currentBox = document.getElementById(`${counter}`)
+            console.log(currentBox)
+            guesses[guessCounter].push(`${String.fromCharCode(pressedKey)}`)
             console.log(`Your guess so far consists of "${guesses[guessCounter]}"`)
-        }
-        currentBox.innerText=`${entry}`
-        }
+            currentBox.innerText=`${String.fromCharCode(pressedKey)}`
+            } else {
+                return
+            }
     }
 
 function getBoxRow (boxes) {
@@ -191,15 +174,3 @@ function handleEnter() {
         alert("A guess MUST consist of 5 letters -- no more, no less!")
     }
 }
-
-
-// frist produce the regular expression 
-let keyboardRegex = /[a-zA-Z]/g
-
-const matcher = function(entry, regex) {
-    let result = entry.match(regex);
-    if (result) {
-        
-    }
-}
-
