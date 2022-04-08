@@ -40,9 +40,7 @@ for (let i = 0; i < rows; i++) {
 window.addEventListener('keydown', getKey)
 
 function getKey(e) {
-    console.log((e.which))
     let pressedKey = e.which
-    console.log(pressedKey)
     paintKey(pressedKey)
 }
 
@@ -55,7 +53,6 @@ for (let i = 0; i < keys.length; i++) {
     keys[i].onclick = ({target}) => {
         // assingning "data key" attribute (letter) to a variable 
         const pressedKey = parseInt(target.getAttribute("data-key"))
-        console.log(pressedKey)
         target.blur()
         paintKey(pressedKey)
     }
@@ -140,7 +137,6 @@ function paintKey (pressedKey) {
             counter += 1
             //make the currentBox variable dynamic/ responsive to insertKey
             let currentBox = document.getElementById(`${counter}`)
-            console.log(currentBox)
             guesses[guessCounter].push(`${String.fromCharCode(pressedKey)}`)
             console.log(`Your guess so far consists of "${guesses[guessCounter]}"`)
             currentBox.innerText=`${String.fromCharCode(pressedKey)}`
