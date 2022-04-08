@@ -136,17 +136,18 @@ function insertDigitalKeyPress (digitalKeyPress) {
     // this function takes the pressed character and puts its text into the current div
 function insertTypedKey(e) {
     //insertKey also needs to handle pushing entry into the nested array for the current guess
-    if (e.key === " ") {
+    let entry = e.key
+    if (entry === " ") {
         return
     }
-    if (e.key === "Backspace") {
+    if (entry === "Backspace") {
         handleBackspace()
         return   
     }
-    if (e.key === "Enter") {
+    if (entry === "Enter") {
         handleEnter()
     }
-    if (e.key != "Enter") {
+    if (entry != "Enter") {
         if (guesses[guessCounter].length === 5) {
             return
         }
@@ -158,10 +159,10 @@ function insertTypedKey(e) {
             window.removeEventListener('keydown', insertKey) 
             return
         } else {
-            guesses[guessCounter].push(`${e.key}`)
+            guesses[guessCounter].push(`${entry}`)
             console.log(`Your guess so far consists of "${guesses[guessCounter]}"`)
         }
-        currentBox.innerText=`${e.key}`
+        currentBox.innerText=`${entry}`
         }
     }
 
@@ -188,6 +189,17 @@ function handleEnter() {
     if (guesses[guessCounter].length != 5) {
         console.log(guesses[guessCounter] , guesses[guessCounter].length)
         alert("A guess MUST consist of 5 letters -- no more, no less!")
+    }
+}
+
+
+// frist produce the regular expression 
+let keyboardRegex = /[a-zA-Z]/g
+
+const matcher = function(entry, regex) {
+    let result = entry.match(regex);
+    if (result) {
+        
     }
 }
 
